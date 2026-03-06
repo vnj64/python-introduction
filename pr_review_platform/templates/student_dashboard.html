@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}Кабинет студента{% endblock %}
+{% block content %}
+<section class="card form-card">
+    <h1>Отправить Pull Request</h1>
+    <form method="post">
+        <label>Ссылка на PR / MR
+            <input type="url" name="pr_url" required placeholder="https://github.com/org/repo/pull/123" />
+        </label>
+
+        <label>Краткий заголовок (опционально)
+            <input type="text" name="title" placeholder="Домашка 5: API" />
+        </label>
+
+        <label>Комментарий (опционально)
+            <textarea name="note" rows="3" placeholder="что именно проверять в первую очередь"></textarea>
+        </label>
+
+        <button type="submit">Отправить на проверку</button>
+    </form>
+</section>
+
+<section class="card">
+    <h2>Мои отправленные работы</h2>
+    {% if submissions %}
+        <table>
+            <thead>
+            <tr>
+                <th>Дата</th>
+                <th>Заголовок</th>
+                <th>PR</th>
+                <th>Статус</th>
+                <th>Оценка</th>
+                <th>Комментарий преподавателя</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in submissions %}
+                <tr>
+                    <td>{{ item['created_at'][:16].replace('T', ' ') }}</td>
+                    <td>{{ item['title'] or '-' }}</td>
+                    <td><a href="{{ item['pr_url'] }}" target="_blank" rel="noopener">Открыть PR</a></td>
+                    <td>{{ 'Проверено' if item['status'] == 'reviewed' else 'На проверке' }}</td>
+                    <td>{{ item['score'] if item['score'] is not none else '-' }}</td>
+                    <td>{{ item['teacher_comment'] or '-' }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Пока нет отправленных PR.</p>
+    {% endif %}
+</section>
+{% endblock %}

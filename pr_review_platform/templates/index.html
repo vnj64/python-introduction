@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}PR Reviewer - Главная{% endblock %}
+{% block content %}
+<section class="card">
+    <h1>Платформа проверки Pull Request</h1>
+    <p>Студенты отправляют PR, преподаватели проверяют и выставляют оценку в одном месте.</p>
+    <div class="actions">
+        <a class="btn" href="{{ url_for('register') }}">Создать аккаунт</a>
+        <a class="btn secondary" href="{{ url_for('login') }}">Войти</a>
+    </div>
+</section>
+{% endblock %}

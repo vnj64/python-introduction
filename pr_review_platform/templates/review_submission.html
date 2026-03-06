@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Проверка работы{% endblock %}
+{% block content %}
+<section class="card form-card">
+    <h1>Проверка работы #{{ submission['id'] }}</h1>
+    <p><strong>Студент:</strong> {{ submission['student_username'] }}</p>
+    <p><strong>Заголовок:</strong> {{ submission['title'] or '-' }}</p>
+    <p><strong>PR:</strong> <a href="{{ submission['pr_url'] }}" target="_blank" rel="noopener">{{ submission['pr_url'] }}</a></p>
+    <p><strong>Комментарий студента:</strong> {{ submission['note'] or '-' }}</p>
+
+    <form method="post">
+        <label>Оценка (0-100)
+            <input type="number" name="score" min="0" max="100" required value="{{ submission['score'] if submission['score'] is not none else '' }}" />
+        </label>
+
+        <label>Комментарий преподавателя
+            <textarea name="teacher_comment" rows="5" placeholder="Что хорошо и что исправить">{{ submission['teacher_comment'] or '' }}</textarea>
+        </label>
+
+        <button type="submit">Сохранить оценку</button>
+    </form>
+</section>
+{% endblock %}
