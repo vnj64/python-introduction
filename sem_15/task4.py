@@ -11,5 +11,3 @@ def hackers_func(hackers: list, security_level: int, increase: int) -> list:
     return success
 
 print(hackers_func([10, 8, 3, 11, 24], 8, 1))
-print(0)
-print(123)
