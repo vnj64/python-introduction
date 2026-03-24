@@ -1,6 +1,7 @@
 def ideal_number(st: str) -> list:
     result = []
     explic = 0
+
     splited = st.split(",")
 
     if len(splited) != 4:
