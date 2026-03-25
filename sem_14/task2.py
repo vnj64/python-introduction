@@ -1,3 +1,7 @@
+# git add filename
+# git commit -m "описание коммита"
+# git push
+
 def solve(st: str) -> str:
     l_count = 0
     u_count = 0
