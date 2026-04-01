@@ -1,14 +1,24 @@
 import os
 import shutil
 
+
 def solve():
     """
     Задание 3: Группировка файлов по первой букве
-    
-    В папке `tasks/data_for_task_3` лежит много файлов. 
-    Вам нужно написать скрипт, который сгруппирует их по первой букве имени.
-    1.  Для каждой буквы алфавита, с которой начинается хотя бы один файл, нужно создать папку с этой буквой (например, `A`, `B`, `C`...). Папки должны быть в верхнем регистре.
-    2.  Переместить каждый файл в соответствующую ему папку.
-    *   Пример: файл `apple.txt` должен быть перемещен в папку `A`, а `Bear.jpg` — в папку `B`.
+
+    В папке `tasks/data_for_task_3` лежит много файлов.
+    Вам нужно сгруппировать их по первой букве имени.
     """
-    pass
+    folder = os.path.join("tasks", "data_for_task_3")
+    items = os.listdir(folder)
+
+    for item in items:
+        source_path = os.path.join(folder, item)
+
+        if os.path.isfile(source_path):
+            first_letter = item[0].upper()
+            target_folder = os.path.join(folder, first_letter)
+            os.makedirs(target_folder, exist_ok=True)
+
+            target_path = os.path.join(target_folder, item)
+            shutil.move(source_path, target_path)
